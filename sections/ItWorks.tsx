@@ -2,62 +2,62 @@ import { useSection } from "deco/hooks/useSection.ts";
 
 export interface Props {
   /**
-   * @format rich-text
-   * @description The description of name.
-   * @default It Works!
+   * @title Título da página
+   * @default Política de Privacidade
    */
-  name?: string;
-
-  count?: number;
+  title?: string;
 }
 
-export default function Section({ name = "It Works!", count = 0 }: Props) {
-  /**
-   * useSection is a nice hook for getting the HTMX link to render this section,
-   * but with the following Props
-   */
-  const downLink = useSection({ props: { count: count - 1 } });
-  const upLink = useSection({ props: { count: count + 1 } });
-
+export default function PrivacyPolicy({ title = "Política de Privacidade" }: Props) {
   return (
     <div
-      id="it-works"
-      class="container py-10 flex flex-col h-screen w-full items-center justify-center gap-16"
+      id="privacy-policy"
+      class="container py-10 px-4 max-w-4xl mx-auto flex flex-col gap-6 text-base leading-relaxed"
     >
-      <div
-        class="leading-10 text-6xl"
-        dangerouslySetInnerHTML={{
-          __html: name,
-        }}
-      />
+      <h1 class="text-4xl font-bold">{title}</h1>
 
-      <div class="flex flex-col items-center justify-center gap-2">
-        <div class="flex items-center gap-4">
-          <button
-            hx-target="#it-works"
-            hx-swap="outerHTML"
-            hx-get={downLink} // htmx link for this section with the down vote props
-            class="btn btn-sm btn-circle btn-outline no-animation"
-          >
-            <span class="inline [.htmx-request_&]:hidden">
-              -
-            </span>
-            <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
-          </button>
-          <span>{count}</span>
-          <button
-            hx-target="#it-works"
-            hx-swap="outerHTML"
-            hx-get={upLink} // htmx link for this section with the up vote props
-            class="btn btn-sm btn-circle btn-outline no-animation"
-          >
-            <span class="inline [.htmx-request_&]:hidden">
-              +
-            </span>
-            <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
-          </button>
-        </div>
-        <div class="text-sm">Powered by HTMX</div>
+      <p>
+        Este aplicativo utiliza a API do LinkedIn para acessar dados do seu perfil com seu
+        consentimento, com o objetivo de melhorar sua presença na plataforma.
+      </p>
+
+      <h2 class="text-2xl font-semibold mt-6">🔍 Dados que coletamos</h2>
+      <ul class="list-disc list-inside">
+        <li>Seu nome e título profissional</li>
+        <li>Informações públicas do seu perfil</li>
+        <li>Histórico de atividades, conexões e postagens (se autorizado)</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold mt-6">🧠 Como usamos esses dados</h2>
+      <p>
+        Os dados são processados por um agente de IA que sugere ações para melhorar seu
+        perfil, publica conquistas, e gera conteúdo relevante, sempre com sua autorização.
+      </p>
+
+      <h2 class="text-2xl font-semibold mt-6">🔒 Armazenamento e segurança</h2>
+      <p>
+        Não armazenamos seus dados permanentemente em servidores. Todas as ações são
+        feitas em tempo real com segurança e respeito à sua privacidade.
+      </p>
+
+      <h2 class="text-2xl font-semibold mt-6">🚫 Compartilhamento de dados</h2>
+      <p>
+        Não compartilhamos suas informações com terceiros sob nenhuma circunstância.
+      </p>
+
+      <h2 class="text-2xl font-semibold mt-6">❌ Revogação de acesso</h2>
+      <p>
+        Você pode revogar o acesso do aplicativo a qualquer momento nas configurações de
+        privacidade da sua conta LinkedIn.
+      </p>
+
+      <h2 class="text-2xl font-semibold mt-6">📧 Contato</h2>
+      <p>
+        Em caso de dúvidas, entre em contato pelo e-mail: <strong>seuemail@email.com</strong>
+      </p>
+
+      <div class="mt-8 text-sm text-gray-500">
+        Última atualização: {new Date().toLocaleDateString("pt-BR")}
       </div>
     </div>
   );
